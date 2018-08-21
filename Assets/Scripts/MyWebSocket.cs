@@ -30,20 +30,30 @@ public class MyWebSocket : MonoBehaviour {
 		DebugInterface.DebugMsg ("OSX Platform");
 		#elif UNITY_STANDALONE_WIN
 		DebugInterface.DebugMsg ("Windows Platform");
+		SetupWebSocketServer ();
 		#endif
 
 		#if UNITY_EDITOR
+		DebugInterface.DebugMsg ("Unity Editor Platform");
+		SetupWebSocketServer ();
+		#endif
+
+
+
+
+	}
+
+	void SetupWebSocketServer(){
+		if (wsServer != null)
+			return;
 		wsServer = new WebSocketServer (25568);
 
 		wsServer.AddWebSocketService<BasicWebsocketBehaviour>("/BasicWebsocketBehaviour");
 		wsServer.AddWebSocketService<MobileAcc>("/mobile");
 
 		wsServer.Start ();
-		InvokeRepeating ("MyInvoke", 0, 0.1f);
+		InvokeRepeating ("MyInvoke", 0, 0.05f);
 		DebugInterface.DebugMsg ("Start Websocket Server");
-		#endif
-
-
 	}
 
 	void OnDestroy(){

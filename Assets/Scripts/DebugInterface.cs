@@ -16,12 +16,16 @@ public class DebugInterface : MonoBehaviour {
 	public static void DebugMsg(string msg){
 		if (current.DebugTestObj == null)
 			return;
+		if (current.DebugTestObj.text.Length > 200)
+			current.DebugTestObj.text = "";
 		current.DebugTestObj.text += "\n" + msg;
 	}
 
 	public void SliderValueShow(float src){
 		if (current.DebugTestObj == null)
 			return;
-		current.DebugTestObj.text += "\n" + "Setting Speed To : " + src.ToString("F2") ;
+		if (current.DebugTestObj.text.Length > 200)
+			current.DebugTestObj.text = "";
+		current.DebugTestObj.text += "\n" + "Setting To : " + src.ToString("F2") ;
 	}
 }
