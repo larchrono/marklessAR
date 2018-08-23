@@ -45,4 +45,5 @@ public class LogicSystem : MonoBehaviour {
 			nowSelect = Instantiate (_prefabImageSelect);
 		nowSelect.transform.SetParent (btn.transform, false);
 	}
+
 }
